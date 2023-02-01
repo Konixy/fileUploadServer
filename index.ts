@@ -28,7 +28,6 @@ app.use(
 );
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
-app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.redirect(`/public/index.html`);

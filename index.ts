@@ -44,7 +44,11 @@ app.post("/upload", (req, res) => {
 
   const file = files.file as UploadedFile;
 
-  if (!file.mimetype.match(/^(image|application\/octet-stream)/)) {
+  if (
+    !file.mimetype.match(
+      /^(image|application\/octet-stream|application\/x-bittorrent)/
+    )
+  ) {
     return res.send({
       success: false,
       message: `this type of file is not allowed (${file.mimetype})`,

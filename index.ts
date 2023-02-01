@@ -31,6 +31,12 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.post("/upload", (req, res) => {
   const files = req.files;
+  let location = null;
+  if (req.query.location) {
+    location = (req.query.location as string)
+      .replace(/\s/g, "_")
+      .replace(/[$&+,:;=?@#|'<>^.*()%!-\/]/gi, "");
+  }
 
   if (!files || !files.file)
     return res.send({ success: false, message: "no files provided" });
@@ -46,11 +52,15 @@ app.post("/upload", (req, res) => {
   const newFileName = file.name
     .replace(/\s/g, "_")
     .replace(/[$&+,:;=?@#|'<>^*()%!-]/gi, "");
-  file.mv(`${__dirname}/${config.saveDir}/${newFileName}`).then(
+
+  const path = `/${config.saveDir}${
+    location ? `/${location}` : ""
+  }/${newFileName}`;
+  file.mv(`${__dirname}${path}`).then(
     () => {
       return res.send({
         success: true,
-        url: `/${config.saveDir}/${newFileName}`,
+        url: path,
       });
     },
     (e) => {

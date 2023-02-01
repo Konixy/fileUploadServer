@@ -47,7 +47,7 @@ app.post("/upload", (req, res) => {
   if (!file.mimetype.match(/^(image|application\/octet-stream)/)) {
     return res.send({
       success: false,
-      message: "this type of file is not allowed",
+      message: `this type of file is not allowed (${file.mimetype})`,
     });
   }
   const newFileName = file.name

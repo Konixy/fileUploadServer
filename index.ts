@@ -43,7 +43,9 @@ app.post("/upload", (req, res) => {
       message: "this type of file is not allowed",
     });
   }
-  const newFileName = encodeURIComponent(file.name.replace(/\s/g, "_"));
+  const newFileName = file.name
+    .replace(/\s/g, "_")
+    .replace(/[$&+,:;=?@#|'<>.^*()%!-]/gi, "");
   file.mv(`${__dirname}/${config.saveDir}/${newFileName}`).then(
     () => {
       return res.send({

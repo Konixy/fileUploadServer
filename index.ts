@@ -1,9 +1,8 @@
 import express from "express";
 import fileUpload, { UploadedFile } from "express-fileupload";
 import cors from "cors";
-// @ts-ignore
-import fileManager from "express-file-manager";
 import config from "./config";
+
 const app = express();
 
 app.use(cors());
@@ -18,7 +17,6 @@ app.use(
 );
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
-app.use("/uploads", fileManager(__dirname + "/uploads"));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {

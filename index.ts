@@ -29,10 +29,6 @@ app.use(
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
-app.get("/", (req, res) => {
-  res.redirect(`/public/index.html`);
-});
-
 app.post("/upload", (req, res) => {
   const files = req.files;
 

@@ -54,7 +54,7 @@ app.post("/upload", (req, res) => {
       message: `this type of file is not allowed (${file.mimetype})`,
     });
   }
-  const newFileName = file.name
+  const newFileName = ((req.query.name as string) || file.name)
     .replace(/\s/g, "_")
     .replace(/[$&+,:;=?@#|'<>^*()%!-]/gi, "");
 

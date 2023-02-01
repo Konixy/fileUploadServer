@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.ts"
+    "test": "nodemon index.ts",
+    "sync": "git add -A && git commit -m \"Update\" && git push"
   },
   "keywords": [],
   "author": "",

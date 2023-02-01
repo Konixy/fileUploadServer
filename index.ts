@@ -56,7 +56,7 @@ app.post("/upload", (req, res) => {
   }
   const newFileName = ((req.query.name as string) || file.name)
     .replace(/\s/g, "_")
-    .replace(/[$&+,:;=?@#|'<>^*()%!-]/gi, "");
+    .replace(/[$&+,:;=?@#|'<>^*()%!]/gi, "");
 
   const path = `/${config.saveDir}/${location || "files"}/${newFileName}`;
   file.mv(`${__dirname}${path}`).then(

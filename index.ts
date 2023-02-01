@@ -43,9 +43,14 @@ app.post("/upload", (req, res) => {
       message: "this type of file is not allowed",
     });
   }
-  const newFileName = file.name
-    .replace(/\s/g, "_")
-    .replace(/[$&+,:;=?@#|'<>.^*()%!-]/gi, "");
+  const fileNameArr = file.name.split(".");
+  const fileExtention = "." + fileNameArr[fileNameArr.length - 1];
+
+  fileNameArr.pop();
+  const fileName = fileNameArr.join(".");
+  const newFileName =
+    fileName.replace(/\s/g, "_").replace(/[$&+,:;=?@#|'<>.^*()%!-]/gi, "") +
+    fileExtention;
   file.mv(`${__dirname}/${config.saveDir}/${newFileName}`).then(
     () => {
       return res.send({

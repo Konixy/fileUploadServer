@@ -31,11 +31,12 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.post("/upload", (req, res) => {
   const files = req.files;
-  let location = null;
-  if (req.query.location) {
-    location = (req.query.location as string)
-      .replace(/\s/g, "_")
-      .replace(/[$&+,:;=?@#|'<>^.*()%!-\/]/gi, "");
+  let location: string | null = null;
+  if (
+    req.query.location &&
+    (req.query.location as string).match(/^(images|files|torrents)$/)
+  ) {
+    location = req.query.location as string;
   }
 
   if (!files || !files.file)

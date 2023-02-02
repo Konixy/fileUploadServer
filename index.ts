@@ -43,7 +43,7 @@ app.post("/upload", (req, res) => {
   }
 
   if (!files || !files.file)
-    return res.send({ success: false, message: "no files provided" });
+    return res.send({ success: false, message: "Veuillez inclure un fichier" });
 
   const file = files.file as UploadedFile;
 
@@ -54,7 +54,7 @@ app.post("/upload", (req, res) => {
   ) {
     return res.send({
       success: false,
-      message: `this type of file is not allowed (${file.mimetype})`,
+      message: `Ce type de fichier n'est pas autorisé (${file.mimetype})`,
     });
   }
   const newFileName = ((req.query.name as string) || file.name)

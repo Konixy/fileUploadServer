@@ -2,6 +2,7 @@ import express from "express";
 import fileUpload, { UploadedFile } from "express-fileupload";
 import cors from "cors";
 import config from "./config";
+import morgan from "morgan";
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use(morgan("dev"));
 
 app.use(
   fileUpload({

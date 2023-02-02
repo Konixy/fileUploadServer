@@ -66,6 +66,7 @@ app.post("/upload", (req, res) => {
     () => {
       return res.send({
         success: true,
+        message: "Fichier enregistré sur le serveur !",
         url: path,
       });
     },

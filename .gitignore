@@ -2,4 +2,4 @@
 package-lock.json
 config.ts
 /dist
-/uploads/files/*
+/uploads/**/*

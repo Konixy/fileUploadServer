@@ -9,9 +9,7 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: `${config.clientDomain}${
-      config.clientPort === 80 ? "" : `:${config.clientPort}`
-    }`,
+    origin: config.allowedOrigins,
   })
 );
 

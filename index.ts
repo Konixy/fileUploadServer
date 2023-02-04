@@ -6,7 +6,18 @@ import morgan from "morgan";
 
 const app = express();
 
-app.use(cors({ origin: config.allowedOrigin }));
+app.use(
+  cors((req, callback) => {
+    let corsOptions = { origin: false };
+    const origin = req.header("Origin");
+    if (origin && config.allowedOrigins.indexOf(origin) !== -1) {
+      corsOptions.origin = true;
+    } else {
+      corsOptions.origin = false;
+    }
+    callback(null, corsOptions);
+  })
+);
 
 app.use(morgan("dev"));
 
